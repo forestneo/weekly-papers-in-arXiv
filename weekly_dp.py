@@ -106,7 +106,6 @@ def write_markdown(time_list, time_papers, filename):
     for time in time_list:
         f.write('# {}\n\n'.format(time).encode())
         papers_info = time_papers[time]
-        print(papers_info)
         for paper in papers_info:
             md = '## [{}]({})\n\n*{}*\n\n{}\n\n'.format(paper['title'], paper['link'], paper['authors'], paper['abstract'])
             f.write('{}\n'.format(md).encode())
@@ -121,6 +120,7 @@ if __name__ == '__main__':
 
     keywords = parser.parse_args().keywords.replace('\'', '').split(',')
     filename = parser.parse_args().filename
+    link = parser.parse_args().link
 
     # 如果不指定文件名，则获取时间作为文件名，如 20221209_0009.md
     if filename == 'None':
@@ -129,4 +129,4 @@ if __name__ == '__main__':
 
     print('output filename = ', filename)
     print('searching ', keywords)
-    get_weekly_papers(keywords, filename)
+    get_weekly_papers(keywords, filename, link)
