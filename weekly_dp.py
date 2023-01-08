@@ -114,11 +114,11 @@ def write_markdown(time_list, time_papers, filename):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='parameters for weekly dp')
-    parser.add_argument('--keywords', type=str, default="'differential privacy','differentially private'")
+    parser.add_argument('--keywords', type=str, default="'differential privacy', 'differentially private'")
     parser.add_argument('--filename', type=str, default="None")
     parser.add_argument('--link', type=str, default="https://arxiv.org/list/cs.CR/pastweek?show=120")
 
-    keywords = parser.parse_args().keywords.replace('\'', '').split(',')
+    keywords = parser.parse_args().keywords.replace('\'', '').split(', ')
     filename = parser.parse_args().filename
     link = parser.parse_args().link
 
