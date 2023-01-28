@@ -33,16 +33,6 @@ def is_related(abstract, keywords):
     return related_flag
 
 
-def paper2md(paper_info: dict):
-    title = paper_info['title']
-    link = paper_info['link']
-    abstract = paper_info['abstract']
-    authors = paper_info['authors']
-
-    res_str = "## [{}]({})\n{}\n{}\n".format(title, link, authors, abstract)
-    return res_str
-
-
 def get_weekly_papers(keywords: str, filename: str, link: str):
     page_content = get_page_content(link)
     arxiv_ids = get_arxiv_ids_from_content(page_content)
