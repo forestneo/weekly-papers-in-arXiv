@@ -33,27 +33,6 @@ def is_related(abstract, keywords):
     return related_flag
 
 
-def filter_papers_by_arxiv_id(arxiv_id='2209.13454', keywords=None):
-    res = arxiv.Search(id_list=[arxiv_id])
-    paper = next(res.results())
-    paper_info = dict()
-    paper_info['link'] = r'https://arxiv.org/abs/' + arxiv_id
-    paper_info['title'] = paper.title
-    # 格式化到 20221001格式
-    paper_info['time'] = str(paper.updated.year).zfill(4) + str(paper.updated.month).zfill(2) + str(
-        paper.updated.day).zfill(2)
-
-    paper_info['authors'] = ', '.join([author.name for author in paper.authors])
-
-    abstract = paper.summary
-    abstract = re.sub(r'\n {2}', r'\n###', abstract)
-    abstract = re.sub(r'\n', r' ', abstract)
-    abstract = re.sub(r'###', r'\n', abstract)
-    paper_info['abstract'] = abstract
-
-    return paper_info
-
-
 def paper2md(paper_info: dict):
     title = paper_info['title']
     link = paper_info['link']
@@ -61,11 +40,6 @@ def paper2md(paper_info: dict):
     authors = paper_info['authors']
 
     res_str = "## [{}]({})\n{}\n{}\n".format(title, link, authors, abstract)
-
-    for key_word in keywords:
-        if key_word in paper_info['abstract'].lower():
-            print(paper2md(paper_info))
-
     return res_str
 
 
